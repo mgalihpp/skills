@@ -14,8 +14,7 @@ skills/
 │   ├── skills/      # poteto-mode, how, why, architect, tdd, unslop, etc.
 │   ├── agents/      # poteto-agent, comment-sicko
 │   └── LICENSE      # MIT © Lauren Tan (upstream)
-├── README.md
-└── LICENSE          # MIT © 2026 mgalihpp (this repo)
+└── README.md
 ```
 
 `pstack` is a Cursor/Claude/opencode/oh-my-pi compatible plugin. It ships `poteto-mode` (22 playbooks: bug-fix, feature, refactor, perf, prototype, etc.) plus situational skills and a strict subagent style.
