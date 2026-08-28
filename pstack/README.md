@@ -14,9 +14,44 @@ fork it. improve it. make it yours. PRs are welcome!
 
 ## install
 
+**Cursor (native):**
 ```bash
 /add-plugin pstack
 ```
+
+**opencode:** skills are auto-discovered via the `agents` provider. No plugin install needed — clone or symlink pstack so `.agents/skills` is visible:
+```bash
+# option A: clone into your opencode skills dir (user-global)
+git clone https://github.com/cursor/plugins pstack
+cp -r pstack/pstack/.agents/skills/* ~/.config/opencode/skills/
+# or project-local: copy to .agents/skills/ in your repo (recommended, portable)
+cp -r pstack/pstack/skills/* .agents/skills/
+# option B: npm plugin (if published)
+# add to opencode.json: { "plugin": ["pstack"] }
+opencode plugin install pstack
+```
+Verify: `skill` tool should list `poteto-mode`, `architect`, `how`, etc. If not, ensure `.agents/skills/*/SKILL.md` or `.opencode/skills/*/SKILL.md` exists from the repo root.
+
+**oh-my-pi (omp):**
+```bash
+# omp discovers via: .omp/skills, .agents/skills, claude, codex, opencode, github providers
+# project-local (portable, works everywhere):
+cp -r pstack/pstack/skills/* .agents/skills/
+cp -r pstack/pstack/agents/* .agents/agents/
+# or user-global:
+cp -r pstack/pstack/skills/* ~/.config/omp/skills/  # or ~/.omp/skills/
+# or as extension package:
+# add to omp config: extensions: ["./pstack"]  — skills/ next to the package is discovered as omp-plugins provider (priority 90)
+```
+Check: `omp skills` or system prompt `<available_skills>` should include `poteto-mode`. Use `skill://poteto-mode` or `/skill:poteto-mode` to load.
+
+**Claude Code / universal fallback (`.agents/skills`):**
+```bash
+cp -r pstack/pstack/skills/* .agents/skills/
+cp -r pstack/pstack/agents/* .agents/agents/
+# or ~/.agents/skills/ for user-global
+```
+All four harnesses read `.agents/skills/*/SKILL.md` (agents provider, priority 70+). This single copy makes pstack work in Cursor (via `.cursor-plugin`), opencode, omp, and Claude Code simultaneously. Run `scripts/sync-universal.sh` after editing `skills/*` to re-mirror to `.agents/.opencode/.claude/.omp`.
 
 ## get started
 
