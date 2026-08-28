@@ -49,4 +49,6 @@ Details and all 22 playbooks: [`pstack/skills/poteto-mode/SKILL.md`](./pstack/sk
 
 ## License
 
-MIT — see [LICENSE](./LICENSE). `pstack/` upstream is MIT © 2026 Lauren Tan; this collection is MIT © 2026 mgalihpp.
+MIT — see [LICENSE](./LICENSE). `pstack/` upstream is MIT © 2026 Lauren Tan.
+
+this collection by mgalihpp.
