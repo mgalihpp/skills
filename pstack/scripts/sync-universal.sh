@@ -23,20 +23,24 @@ for dest in .agents/agents .opencode/agents .claude/agents .omp/agents; do
   echo "  $dest: $(ls -1 "$ROOT/$dest" 2>/dev/null | wc -l) agents"
 done
 echo "done. Validate: skills name == dir and regex ^[a-z0-9]+(-[a-z0-9]+)*$"
-python3 -c "
+VALIDATION_ROOT="$ROOT"
+if command -v cygpath >/dev/null 2>&1; then
+  VALIDATION_ROOT="$(cygpath -w "$ROOT")"
+fi
+PSTACK_ROOT="$VALIDATION_ROOT" python3 -c '
 import os, re
 from pathlib import Path
-root=Path('$ROOT/skills')
-pat=re.compile(r'^[a-z0-9]+(-[a-z0-9]+)*$')
+root=Path(os.environ["PSTACK_ROOT"]) / "skills"
+pat=re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 ok=True
 for d in sorted(os.listdir(root)):
-    f=root/d/'SKILL.md'
-    if not f.exists(): print(f'MISSING: {d}'); ok=False; continue
-    text=f.read_text(encoding='utf-8', errors='ignore')
+    f=root/d/"SKILL.md"
+    if not f.exists(): print(f"MISSING: {d}"); ok=False; continue
+    text=f.read_text(encoding="utf-8", errors="ignore")
     import re as re2
-    m=re2.search(r'^name:\s*(.+)$', text, re.M)
-    name=m.group(1).strip().strip('\"').strip(\"'\") if m else ''
-    if not pat.match(name): print(f'INVALID: {d} => {name!r}'); ok=False
-    if name!=d: print(f'MISMATCH: {d} => {name!r}'); ok=False
-print('validate: OK' if ok else 'validate: FAILED')
-"
+    m=re2.search(r"^name:\s*(.+)$", text, re.M)
+    name=m.group(1).strip().strip(chr(34)).strip(chr(39)) if m else ""
+    if not pat.match(name): print(f"INVALID: {d} => {name!r}"); ok=False
+    if name!=d: print(f"MISMATCH: {d} => {name!r}"); ok=False
+print("validate: OK" if ok else "validate: FAILED")
+'
