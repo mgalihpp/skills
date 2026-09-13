@@ -17,8 +17,6 @@ If the scope is ambiguous, state your interpretation and explore. The user can r
 
 When in doubt, take the simple path.
 
-If you cannot spawn subagents, or a spawned explorer never returns, run the exploration angles yourself sequentially and keep going. The angles are the point, not the parallelism. Never end your turn waiting on explorers.
-
 ## Step 2a. Explore (complex questions only)
 
 Decompose the question into 2 to 4 exploration angles, each a distinct slice of the subsystem. Spawn all explorers in a single message:
