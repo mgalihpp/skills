@@ -1,0 +1,22 @@
+{
+  "name": "pstack",
+  "version": "0.14.4",
+  "description": "if you want to go fast, go deep first. pstack helps you write less, but higher quality code.",
+  "license": "MIT",
+  "author": { "name": "Lauren Tan" },
+  "homepage": "https://github.com/cursor/plugins/tree/main/pstack",
+  "repository": "https://github.com/cursor/plugins",
+  "keywords": ["pstack","poteto-mode","workflow","principles","agent-style","subagents","unslop"],
+  "opencode": {
+    "skills": "./skills",
+    "agents": "./agents"
+  },
+  "oh-my-pi": {
+    "skills": "./skills",
+    "agents": "./agents"
+  },
+  "agents": {
+    "skills": "./skills",
+    "agents": "./agents"
+  }
+}
